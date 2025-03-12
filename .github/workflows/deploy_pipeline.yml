@@ -8,7 +8,7 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
   AWS_REGION: eu-west-2
-  TERRAFORM_ACTION: destroy
+  TERRAFORM_ACTION: apply
 
 jobs:
   # Configure AWS credentials 
@@ -176,7 +176,7 @@ jobs:
       - configure_aws_credentials
       - deploy_aws_infrastructure
     if: needs.deploy_aws_infrastructure.outputs.terraform_action !='destroy'
-    runs-on: ubuntu latest
+    runs-on: ubuntu-latest
     steps:
       - name: Check for running EC2 runner
         run: |
